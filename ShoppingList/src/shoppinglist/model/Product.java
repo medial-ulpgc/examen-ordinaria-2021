@@ -1,6 +1,6 @@
 package shoppinglist.model;
 
-class Product {
+public class Product {
 
     private final String description;
     private final String category;
@@ -8,6 +8,14 @@ class Product {
     public Product(String description, String category) {
         this.description = description;
         this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getCategory() {
+        return category;
     }
 
     @Override

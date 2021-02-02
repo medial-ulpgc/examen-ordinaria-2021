@@ -1,6 +1,6 @@
 package shoppinglist.model;
 
-class Entry {
+public class Entry {
 
     private final Product product;
     private boolean isMarked;
