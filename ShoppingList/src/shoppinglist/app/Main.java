@@ -1,21 +1,59 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package shoppinglist.app;
 
-/**
- *
- * @author arese
- */
-public class Main {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Scanner;
+import shoppinglist.model.ShopList;
+import shoppinglist.view.ShopListCollectionDisplay;
+import shoppinglist.view.ShopListCollectionLoader;
 
-    /**
-     * @param args the command line arguments
-     */
+public class Main {
     public static void main(String[] args) {
-        // TODO code application logic here
+        List<ShopList> shoplists = new ArrayList<>();
+        shoplists.add(new ShopList("BBQ", new ArrayList<>()));
+        shoplists.add(new ShopList("Weekend", new ArrayList<>()));
+        shoplists.add(new ShopList("WorkDays", new ArrayList<>()));
+        shoplists.add(new ShopList("Birthday Party", new ArrayList<>()));
+    
+    
+        ShopListCollectionLoader loader = loader(shoplists);
+        ShopListCollectionDisplay  collection = collectionDisplay();
+        //Hasta aqui llegue :(
     }
+
+    private static ShopListCollectionDisplay collectionDisplay() {
+        return new ShopListCollectionDisplay() {
+            Scanner scaner = new Scanner(System.in);
+            private List<ShopList> shopListCollection;
+            private ShopListCollectionDisplay.ListSelected listSelected;
+            @Override
+            public void display(List<ShopList> shopListCollection) {
+                this.shopListCollection = shopListCollection;
+                System.out.println(shopListCollection);
+                String nextLine = scaner.nextLine();
+                shopListCollection.stream()
+                        .filter((x)->x.getName().equals(nextLine))
+                        .limit(1)
+                        .forEach(listSelected::execute);
+                
+            }
+
+            @Override
+            public void on(ShopListCollectionDisplay.ListSelected listSelected) {
+                this.listSelected =listSelected;
+            }
+        };
+    }
+
+    private static ShopListCollectionLoader loader(List<ShopList> shoplists) {
+        return new ShopListCollectionLoader(){
+            @Override
+            public List<ShopList> load() {
+                return shoplists;
+            }
+        };
+    }
+    
     
 }
