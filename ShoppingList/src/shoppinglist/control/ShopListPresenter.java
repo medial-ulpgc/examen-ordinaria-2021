@@ -1,7 +1,5 @@
 package shoppinglist.control;
 
-import java.awt.DisplayMode;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -79,33 +77,34 @@ public class ShopListPresenter {
         };
     }
 
-    ShopListDisplay.ProductDeletion deleteProduct(ShopList list){
+    ShopListDisplay.ProductDeletion deleteProduct(ShopList list) {
         return new ShopListDisplay.ProductDeletion() {
             @Override
             public void delete(Product product) {
-                
+
                 Iterator<Entry> iterator = list.getEntries().iterator();
                 while (iterator.hasNext()) {
                     Entry entry = iterator.next();
-                    if(entry.getProduct().equals(product)){
+                    if (entry.getProduct().equals(product)) {
                         iterator.remove();
                     }
                 }
-               shopListDisplay.display(list);
+                shopListDisplay.display(list);
             }
         };
     }
-    
-    ShopListDisplay.EntryMarking  mesageMarking(ShopList list){
+
+    ShopListDisplay.EntryMarking mesageMarking(ShopList list) {
         return new ShopListDisplay.EntryMarking() {
             @Override
-            public void mark(Entry entry) {
+            public void toggle(Entry entry) {
                 entry.setIsMarked(!entry.isIsMarked());
                 shopListDisplay.display(list);
             }
         };
     }
-    ShopListDisplay.ProductAddition  newProduct(ShopList list){
+
+    ShopListDisplay.ProductAddition newProduct(ShopList list) {
         return new ShopListDisplay.ProductAddition() {
             @Override
             public void add(Product product) {

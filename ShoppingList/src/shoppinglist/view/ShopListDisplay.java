@@ -34,7 +34,7 @@ public interface ShopListDisplay {
 
     public interface EntryMarking {
 
-        void mark(Entry entry);
+        void toggle(Entry entry);
     }
 
     public interface ProductAddition {
